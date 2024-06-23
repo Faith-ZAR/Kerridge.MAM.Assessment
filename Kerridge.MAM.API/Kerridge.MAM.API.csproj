@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Kerridge.MAM.Data\Kerridge.MAM.Data.csproj" />
+    <ProjectReference Include="..\Kerridge.MAM.Services\Kerridge.MAM.Services.csproj" />
+  </ItemGroup>
+
 </Project>

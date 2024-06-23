@@ -119,16 +119,20 @@
             "Total": 22.95
         }
     ],
-    "ReceiptProductdata": [
+    "ReceiptProductData": [
         {
             "ReceiptProductId": 1,
             "ReceiptId": 1,
-            "ProductId": 3
+            "ProductId": 3,
+			"TaxAmount": 0.52,
+			"LineTotal": 7.77
         },
         {
-            "ReceiptProductId": 1,
+            "ReceiptProductId": 2,
             "ReceiptId": 1,
-            "ProductId": 4
+            "ProductId": 4,
+			"TaxAmount": 0.52,
+			"LineTotal": 7.77
         }
     ]
 }

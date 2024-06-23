@@ -11,9 +11,9 @@ namespace Kerridge.MAM.Services.Repositories
 {
     public class TaxRepository : ITax
     {
-        private readonly JsonDBRepository<Tax> _repository;
+        private readonly IRepository<Tax> _repository;
 
-        public TaxRepository(JsonDBRepository<Tax> repository)
+        public TaxRepository(IRepository<Tax> repository)
         {
             _repository = repository;
         }
@@ -23,12 +23,12 @@ namespace Kerridge.MAM.Services.Repositories
             return (taxPercentage / 100) * price;
         }
 
-        public Task<Tax> GetByTaxType(bool isImport)
+        public async Task<Tax> GetByTaxType(bool isImport)
         {
-            var jsonObject = _repository.LoadData();
-            var allObjects = _repository.GetObjects(jsonObject);
-            var currentObject = allObjects.FirstOrDefault(x => (bool)x.GetType().GetProperty("IsImportDuty").GetValue(x) == isImport && (bool)x.GetType().GetProperty("IsActive").GetValue(x) == true);
-            return Task.FromResult(currentObject);
+            var allObjects = await _repository.GetAll();
+            var currentObject = allObjects.FirstOrDefault(e => e.IsImportDuty == isImport && e.IsActive);
+
+            return currentObject;
         }
     }
 }

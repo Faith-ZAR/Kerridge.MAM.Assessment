@@ -10,33 +10,33 @@ namespace Kerridge.MAM.API.Controllers
     {
         // GET: api/<ReceiptController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetReceipt()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET api/<ReceiptController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string GetReceiptById(int id)
         {
             return "value";
         }
 
         // POST api/<ReceiptController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void PostReceipt([FromBody] string value)
         {
         }
 
         // PUT api/<ReceiptController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void PutReceipt(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/<ReceiptController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteReceipt(int id)
         {
         }
     }

@@ -21,7 +21,7 @@ namespace Kerridge.MAM.Services.Services
 
         public async Task<double> CalculateProductTax(Product product)
         {
-            bool isImport = (product.IsImport);
+            bool isImport = (product.IsImported);
 
             Tax taxObject = await _tax.GetByTaxType(isImport);
 
