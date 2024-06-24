@@ -53,17 +53,16 @@ namespace Kerridge.MAM.Services.Repositories
         #endregion
 
         #region CRUD MANAGEMENT
-        public Task Add(T entity)
+        public void Add(T entity)
         {
             var jsonObject = LoadData();
             var allObjects = GetObjects(jsonObject);
             allObjects.Add(entity);
             SetObject(jsonObject, allObjects);
             StoreData(jsonObject); 
-            return Task.CompletedTask;
         }
 
-        public Task Delete(int id)
+        public void Delete(int id)
         {
             var jsonObject = LoadData();
             var allObjects = GetObjects(jsonObject);
@@ -75,32 +74,31 @@ namespace Kerridge.MAM.Services.Repositories
                 SetObject(jsonObject, allObjects);
                 StoreData(jsonObject);
             }
-
-            return Task.CompletedTask;
         }
 
-        public Task<List<T>> GetAll()
+        public IEnumerable<T> GetAll()
         {
             var jsonObject = LoadData();
             var allObjects = GetObjects(jsonObject);
 
-            return Task.FromResult(allObjects);
+            return allObjects;
         }
 
-        public Task<T> GetById(int id)
+        public T GetById(int id)
         {
             var jsonObject = LoadData();
             var allObjects = GetObjects(jsonObject);
-            var currentObject = allObjects.FirstOrDefault(x => (int)x.GetType().GetProperty(this.GetType().Name + "Id").GetValue(x) == id);
-            return Task.FromResult(currentObject);
+            var objName = this.GetType().Name;
+            var currentObject = allObjects.FirstOrDefault(x => (int)x.GetType().GetProperty(x.GetType().Name + "Id").GetValue(x) == id);
+            return currentObject;
         }
 
-        public Task Update(T entity)
+        public void Update(T entity)
         {
             var jsonObject = LoadData();
             var allObjects = GetObjects(jsonObject);
-            var objectId = (int)entity.GetType().GetProperty(this.GetType().Name + "Id").GetValue(entity);
-            var index = allObjects.FindIndex(x => (int)x.GetType().GetProperty(this.GetType().Name + "Id").GetValue(x) == objectId);
+            var objectId = (int)entity.GetType().GetProperty(entity.GetType().Name + "Id").GetValue(entity);
+            var index = allObjects.FindIndex(x => (int)x.GetType().GetProperty(x.GetType().Name + "Id").GetValue(x) == objectId);
 
             if(index > 0)
             {
@@ -108,8 +106,6 @@ namespace Kerridge.MAM.Services.Repositories
                 SetObject(jsonObject, allObjects);
                 StoreData(jsonObject);
             }
-
-            return Task.CompletedTask;
         }
         #endregion
     }

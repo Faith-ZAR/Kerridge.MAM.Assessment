@@ -14,14 +14,11 @@ builder.Services.AddControllers();
 string dataFilePath = Path.Combine(builder.Environment.ContentRootPath, "TempDB", "MAM_AssessmentDB.json");
 
 builder.Services.AddSingleton<IRepository<Product>>(x => new JsonDBRepository<Product>(dataFilePath, "ProductData"));
-builder.Services.AddSingleton<IRepository<Receipt>>(x => new JsonDBRepository<Receipt>(dataFilePath, "ReceiptData"));
-builder.Services.AddSingleton<IRepository<ReceiptProduct>>(x => new JsonDBRepository<ReceiptProduct>(dataFilePath, "ReceiptProductData"));
 builder.Services.AddSingleton<IRepository<Tax>>(x => new JsonDBRepository<Tax>(dataFilePath, "TaxData"));
 
-builder.Services.AddSingleton<ITax, TaxRepository>(x => new TaxRepository(x.GetRequiredService<IRepository<Tax>>()));
-builder.Services.AddScoped<ReceiptProductService>();
+builder.Services.AddScoped<ITax, TaxService>();
 builder.Services.AddScoped<ProductService>();
-builder.Services.AddScoped<ReceiptService>();
+builder.Services.AddScoped<TaxService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

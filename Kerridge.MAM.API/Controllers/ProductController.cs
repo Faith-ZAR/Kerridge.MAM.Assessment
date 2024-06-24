@@ -10,57 +10,24 @@ namespace Kerridge.MAM.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ProductService _productService;
-
         public ProductController(ProductService productService)
         {
             _productService = productService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        [HttpPost]
+        public IActionResult ProcessProducts([FromBody] List<InputView> input)
         {
-            var allProducts = await _productService.GetAllProductsAsync();
-
-            return Ok(allProducts);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetProduct(int id)
-        {
-            var product = await _productService.GetProductById(id);
-
-            if(product == null)
+            try
             {
-                return NotFound();
+                var result = _productService.ProcessProducts(input);
+
+                return Ok(result);
             }
-
-            return Ok(product);
-        }
-
-        [HttpPost]//(Name = "AddProduct")]
-        public async Task<IActionResult> AddProduct([FromBody] Product product)
-        {
-            await _productService.AddProductAsync(product);
-            return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
-        }
-
-        [HttpPut]//(Name = "UpdateProduct")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] Product product)
-        {
-            if(id != product.ProductId)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
-
-            await _productService.UpdateProduct(product);
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")] //(Name = "DeleteProduct")]
-        public async Task<IActionResult> DeleteProduct(int id)
-        {
-            await _productService.DeleteProduct(id);
-            return NoContent();
         }
     }
 }

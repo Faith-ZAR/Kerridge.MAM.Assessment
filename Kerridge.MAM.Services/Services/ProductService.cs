@@ -8,38 +8,69 @@ using System.Threading.Tasks;
 
 namespace Kerridge.MAM.Services.Services
 {
-    public class ProductService
+    public class ProductService : IProduct
     {
         private readonly IRepository<Product> _repository;
+        private readonly ITax _tax;
 
-        public ProductService(IRepository<Product> repository)
+        public ProductService(IRepository<Product> repository, ITax tax)
         {
             _repository = repository;
+            _tax = tax;
         }
 
-        public async Task AddProductAsync(Product product)
+        public object ProcessProducts(List<InputView> input)
         {
-            await _repository.Add(product);
+            List<Product> products = new List<Product>();
+
+            foreach (var item in input)
+            {
+                var parts = item.ItemInput.Split(' ');
+                int quantity = int.Parse(parts[0]);
+                decimal price = decimal.Parse(parts[^1]);
+                string name = string.Join(' ', parts.Skip(1).Take(parts.Length - 3));
+                bool imported = name.ToLower().Contains("import");
+
+                products.Add(new Product
+                {
+                    Description = name,
+                    Price = (price * quantity),
+                    Quantity = quantity,
+                    IsImported = imported,
+                    BasicTaxable = item.BasicTaxable
+                });
+            }
+
+            var result = CalculateTotals(products);
+            return result;
         }
 
-        public async Task DeleteProduct(int id)
+        private object CalculateTotals(List<Product> products)
         {
-            await _repository.Delete(id);
-        }
+            decimal totalSalesTaxes = 0;
+            decimal totalPrice = 0;
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync()
-        {
-            return await _repository.GetAll();
-        }
+            foreach (var product in products)
+            {
+                decimal taxAmount = _tax.CalculateTax(product);
+                decimal totalPriceForProduct = product.Price + taxAmount;
 
-        public async Task<Product> GetProductById(int id)
-        {
-            return await _repository.GetById(id);
-        }
+                totalSalesTaxes += taxAmount;
+                totalPrice += totalPriceForProduct;
+                product.TaxAmount = taxAmount;
 
-        public async Task UpdateProduct(Product product)
-        {
-            await _repository.Update(product);
+                Console.WriteLine($"{product.Quantity} {product.Description}: {totalPriceForProduct.ToString("0.00")}");
+            }
+
+            Console.WriteLine($"Sales Taxes: {totalSalesTaxes.ToString("0.00")}");
+            Console.WriteLine($"Total: {totalPrice.ToString("0.00")}");
+
+            return new
+            {
+                Output = products.Select(v => $"{v.Quantity} {v.Description}: {(v.Price + v.TaxAmount).ToString("0.00")}"),
+                SalesTaxes = totalSalesTaxes.ToString("0.00"),
+                Total = totalPrice.ToString("0.00")
+            };
         }
     }
 }

@@ -9,7 +9,15 @@ namespace Kerridge.MAM.Data.Interfaces
 {
     public interface ITax
     {
-        double CalculateTax(double taxPercentage, double price);
-        Task<Tax> GetByTaxType(bool isImport);
+        //TaxType GetTaxType(Product product);
+        decimal CalculateTax(Product product);
+
+    }
+    public enum TaxType
+    {
+        None,
+        Basic,
+        ImportDuty,
+        Both
     }
 }

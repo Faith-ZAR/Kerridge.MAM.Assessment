@@ -8,10 +8,10 @@ namespace Kerridge.MAM.Data.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        Task<List<T>> GetAll();
-        Task<T> GetById(int id);
-        Task Add(T entity);
-        Task Update(T entity);
-        Task Delete(int id);
+        IEnumerable<T> GetAll();
+        T GetById(int id);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(int id);
     }
 }
