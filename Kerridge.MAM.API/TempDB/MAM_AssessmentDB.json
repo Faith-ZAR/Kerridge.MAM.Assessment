@@ -1,0 +1,135 @@
+{
+  "ProductData": [
+    {
+      "ProductId": 1,
+      "Quantity": 1,
+      "Description": "Book",
+      "Price": 12.49,
+      "BasicTaxable": false,
+      "IsImported": false,
+      "IsActive": true
+    },
+    {
+      "ProductId": 2,
+      "Quantity": 1,
+      "Description": "Music CD",
+      "Price": 14.99,
+      "BasicTaxable": true,
+      "IsImported": false,
+      "IsActive": true
+    },
+    {
+      "ProductId": 3,
+      "Quantity": 1,
+      "Description": "Chocolate bar",
+      "Price": 0.85,
+      "BasicTaxable": false,
+      "IsImported": false,
+      "IsActive": true
+    },
+    {
+      "ProductId": 4,
+      "Quantity": 1,
+      "Description": "Imported box of chocolates",
+      "Price": 10.0,
+      "BasicTaxable": false,
+      "IsImported": true,
+      "IsActive": true
+    },
+    {
+      "ProductId": 5,
+      "Quantity": 1,
+      "Description": "Imported bottle of perfume",
+      "Price": 47.5,
+      "BasicTaxable": true,
+      "IsImported": true,
+      "IsActive": true
+    },
+    {
+      "ProductId": 6,
+      "Quantity": 1,
+      "Description": "Imported bottle of perfume",
+      "Price": 27.99,
+      "BasicTaxable": false,
+      "IsImported": true,
+      "IsActive": true
+    },
+    {
+      "ProductId": 7,
+      "Quantity": 1,
+      "Description": "Bottle of perfume",
+      "Price": 18.99,
+      "BasicTaxable": true,
+      "IsImported": false,
+      "IsActive": true
+    },
+    {
+      "ProductId": 8,
+      "Quantity": 1,
+      "Description": "Packet of paracetamol",
+      "Price": 9.75,
+      "BasicTaxable": false,
+      "IsImported": false,
+      "IsActive": true
+    },
+    {
+      "ProductId": 9,
+      "Quantity": 1,
+      "Description": "Box of imported chocolates",
+      "Price": 11.25,
+      "BasicTaxable": false,
+      "IsImported": true,
+      "IsActive": false
+    },
+    {
+      "ProductId": 10,
+      "Quantity": 1,
+      "Description": "Test",
+      "Price": 10.0,
+      "BasicTaxable": true,
+      "IsImported": false,
+      "IsActive": true
+    }
+  ],
+  "TaxData": [
+    {
+      "TaxId": 1,
+      "Description": "Basic Tax",
+      "Percentage": 10.0,
+      "Type": "Basic",
+      "EndDate": "",
+      "IsActive": 1
+    },
+    {
+      "TaxId": 2,
+      "Description": "Import Duty Tax",
+      "Percentage": 5.0,
+      "Type": "ImportDuty",
+      "EndDate": "",
+      "IsActive": 1
+    }
+  ],
+  "ReceiptData": [
+    {
+      "ReceiptId": 1,
+      "SalesTax": 1.24,
+      "Total": 22.95
+    }
+  ],
+  "ReceiptProductData": [
+    {
+      "ReceiptProductId": 1,
+      "ReceiptId": 1,
+      "ProductId": 3,
+      "TaxAmount": 0.52,
+      "TotalPrice": 7.77
+    },
+    {
+      "ReceiptProductId": 2,
+      "ReceiptId": 1,
+      "ProductId": 4,
+      "TaxAmount": 0.52,
+      "TotalPrice": 7.77
+    }
+  ]
+}

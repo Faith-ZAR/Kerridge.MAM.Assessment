@@ -1,0 +1,44 @@
+{
+	"Input1": [
+		{
+			"itemInput": "1 Book at 12,49",
+			"basicTaxable": false
+		},
+		{
+			"itemInput": "1 Music CD at 14,99",
+			"basicTaxable": true
+		},
+		{
+			"itemInput": "1 Chocolate bar at 0,85",
+			"basicTaxable": false
+		}
+	],
+	"Input2": [
+		{
+			"itemInput": "1 Imported box of chocolates at 10,00",
+			"basicTaxable": false
+		},
+		{
+			"itemInput": "1 Imported bottle of perfume at 47,50",
+			"basicTaxable": true
+		}
+	],
+	"Input3": [
+		{
+			"itemInput": "1 Imported bottle of perfume at 27.99",
+			"basicTaxable": true
+		},
+		{
+			"itemInput": "1 Bottle of perfume at 18.99",
+			"basicTaxable": true
+		},
+		{
+			"itemInput": "1 Packet of paracetamol at 9.75",
+			"basicTaxable": false
+		},
+		{
+			"itemInput": "1 Box of imported chocolates at 11.25",
+			"basicTaxable": false
+		}
+	]
+}
