@@ -53,6 +53,13 @@ Output 3:
 Test Data Structure
 -------------------------------
 
+- Copy the array of each input to test.  
+- Open the project using VisualStudio.  
+- Run the API project  
+- Once swagger opens  
+- Select ProcessProducts  
+- Use the structure below to add input  
+
 Input 1:  
 [
 	{
